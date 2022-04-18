@@ -13,8 +13,9 @@ typedef struct{
 
 /* 
      Thomson resonant frequency v2
-     two values must be provided at minimum the third is initialized with a 
-     zero the data base memory is then writed with the matching values.
+     two values must be provided at minimum,
+     the third must be initialized with a zero...
+     the data base memory is then writed with the correct  matching values.
 */
 int tuned_circuit(long double L, long double C, long double Fc,resonant_data* data){
         int a=0;
