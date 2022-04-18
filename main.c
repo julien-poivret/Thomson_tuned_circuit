@@ -2,7 +2,6 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <math.h>
-#include <stdbool.h>
 
 typedef struct{
 	long double L;
@@ -17,15 +16,16 @@ typedef struct{
      the third must be initialized with a zero...
      the data base memory is then writed with the correct  matching values.
 */
+
 int tuned_circuit(long double L, long double C, long double Fc,resonant_data* data){
 	if(L==0.0 && C && Fc){
-		data->L = ((1/Fc)/2)*((1/Fc)/2)/C;
-                data->C=C;
-                data->Fc=Fc;
+		data->L = (1/(2*M_PI*Fc))*(1/(2*M_PI*Fc))/C;
+                data->C = C;
+                data->Fc = Fc;
                 return 1;
 	}
 	if(C==0.0 && L && Fc){
-		data->C = (((1/Fc)/2)*((1/Fc)/2))/L;
+                data->C = (1/(2*M_PI*Fc))*(1/(2*M_PI*Fc))/L;
                 data->L = L;
                 data->Fc = Fc;
                 return 1;
@@ -40,7 +40,7 @@ int tuned_circuit(long double L, long double C, long double Fc,resonant_data* da
 		exit(3);
 	return 0;
 
-};
+}
 	
 // Data preprocessing for arguments handling.
 void format_argv(char* argv[],resonant_data* data){
