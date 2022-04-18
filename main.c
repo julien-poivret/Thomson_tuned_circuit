@@ -52,7 +52,10 @@ void format_argv(char* argv[],resonant_data* data){
 
 int main(int argc,char* argv[]){
 	// Arguments handling condition.
-	char help[70]="(3 cli arguments):  1 inductance, 2 capacitance, 3 Resonant Frequency"; 
+
+	char help[500]="\33[34mThomson Resonant Formula 1/(2*Pi*SQRT(Fc)) for tuned circuit.\33[33m\n"
+                       "     fast, ( 3 cli arguments forever ):  1 inductance, 2 capacitance, 3 Resonant Frequency\n"
+                       "        --- at least 2 arguments non Null must be provided the third unknow is 0. ---\33[0m\n"; 
 	if(argc==1){
 		printf("%s\n",help);
 		return EXIT_SUCCESS;
@@ -63,6 +66,6 @@ int main(int argc,char* argv[]){
         resonant_data Thomson= {.init=1};
         format_argv(argv,&Thomson);
 	tuned_circuit(Thomson.L,Thomson.C,Thomson.Fc,&Thomson);
-	printf("\33[1;1H\33[2J\33[34mTuned resonant circuit:\33[0m\33[3;1HResonant with L:\33[33m%6.3Le \33[0mC:\33[33m%6.3Le \33[0mFc:\33[33m%6.3LeHz\33[0m\n",Thomson.L,Thomson.C,Thomson.Fc); 
+	printf("\33[3J\33[34mTuned resonant circuit:\33[0m\n     \33[3JResonant with \33[34mL:\33[33m%6.3Le \33[34mC:\33[33m%6.3Le \33[34mFreq:\33[33m%6.3LeHz\33[0m\n",Thomson.L,Thomson.C,Thomson.Fc); 
 return EXIT_SUCCESS;
 }
