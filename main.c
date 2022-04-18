@@ -18,46 +18,35 @@ typedef struct{
      the data base memory is then writed with the correct  matching values.
 */
 int tuned_circuit(long double L, long double C, long double Fc,resonant_data* data){
-        int a=0;
-        int b=0;
-        int c=0;
-	if(!L && C && Fc){
+	if(L==0.0 && C && Fc){
 		data->L = ((1/Fc)/2)*((1/Fc)/2)/C;
                 data->C=C;
                 data->Fc=Fc;
                 return 1;
-	}else{
-                a=!a;
 	}
-	if(!C && L && Fc){
+	if(C==0.0 && L && Fc){
 		data->C = (((1/Fc)/2)*((1/Fc)/2))/L;
                 data->L = L;
                 data->Fc = Fc;
                 return 1;
-	}else{
-                b= !b;
 	}
-	if(!Fc && C && L){
+	if(Fc==0.0 && C && L){
 		data->Fc = 1/(2*M_PI*sqrt(L*C));
                 data->L = L;
                 data->C = C;
                 return 1;
-	}else{
-                c=!c;
 	}
-	if(a | b | c){
 		fprintf(stderr,"\33[1;1H\33[2J\33[31mError, at least 2 non null values  must be provided at minimum !\33[0m\n");
 		exit(3);
-	}
 	return 0;
 
 };
-
+	
 // Data preprocessing for arguments handling.
 void format_argv(char* argv[],resonant_data* data){
-	data->L = atoll(argv[1]);
-	data->C = atoll(argv[2]);
-	data->Fc = atoll(argv[3]);
+	data->L = atof(argv[1]);
+	data->C = atof(argv[2]);
+	data->Fc = atof(argv[3]);
 	data->init = 1;
 }
 
